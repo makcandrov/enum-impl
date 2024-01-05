@@ -1,0 +1,18 @@
+[package]
+name = "enum-impl"
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/makcandrov/enum-impl"
+homepage = "https://github.com/makcandrov/enum-impl"
+description = "A Rust procedural macro auto-generating common methods on enums."
+license = "GPL-3.0"
+keywords = ["enum", "impl"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = "2.0"
+convert_case = "0.6"
