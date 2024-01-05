@@ -5,6 +5,7 @@ use syn::Fields;
 use crate::attr::ClassicAttribute;
 
 pub fn expand_is(
+    enum_ident: &Ident,
     variant_ident: &Ident,
     variant_name_snake_case: &str,
     params: &ClassicAttribute,
@@ -27,7 +28,13 @@ pub fn expand_is(
         quote! {}
     };
 
+    let documentation = format!(
+        "Returns `true` if it is the [`{}::{}`] variant. Otherwise, returns `false`.",
+        enum_ident, variant_ident
+    );
+
     quote! {
+        #[doc = #documentation]
         #keyword fn #function_name(&self) -> bool {
             match self {
                 Self::#variant_ident #destruct => true,

@@ -5,6 +5,7 @@ use syn::{DeriveInput, Fields};
 use crate::attr::ClassicAttribute;
 
 pub fn expand_from_local(
+    enum_ident: &Ident,
     variant_ident: &Ident,
     variant_name_snake_case: &str,
     params: &ClassicAttribute,
@@ -79,7 +80,13 @@ pub fn expand_from_local(
         quote! {}
     };
 
+    let documentation = format!(
+        "Generates a [`{}::{}`] variant from the associated data.",
+        enum_ident, variant_ident
+    );
+
     quote! {
+        #[doc = #documentation]
         #keyword fn #function_name(#input) -> Self {
             Self::#variant_ident #destruct
         }
@@ -178,8 +185,14 @@ pub fn expand_from_foreign(input: &DeriveInput, variant_ident: &Ident, fields: &
     let enum_ident = &input.ident;
     let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
 
+    let documentation = format!(
+        "Creates a [`{}::{}`] variant from the associated data.",
+        enum_ident, variant_ident
+    );
+
     quote! {
         impl #impl_generics From<#ty> for #enum_ident #ty_generics #where_clause {
+            #[doc = #documentation]
             fn from(#ret: #ty) -> Self {
                 Self::#variant_ident #destruct
             }

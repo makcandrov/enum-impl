@@ -47,6 +47,7 @@ fn try_expand(input: &DeriveInput) -> syn::Result<TokenStream> {
 
         if let Some(params) = &attributes.as_ref_mut {
             expanded.extend(expand_as_ref_mut(
+                enum_ident,
                 variant_ident,
                 &variant_name_snake_case,
                 params,
@@ -54,11 +55,18 @@ fn try_expand(input: &DeriveInput) -> syn::Result<TokenStream> {
             ));
         }
         if let Some(params) = &attributes.as_ref {
-            expanded.extend(expand_as_ref(variant_ident, &variant_name_snake_case, params, fields));
+            expanded.extend(expand_as_ref(
+                enum_ident,
+                variant_ident,
+                &variant_name_snake_case,
+                params,
+                fields,
+            ));
         }
         if let Some(params) = &attributes.from {
             match params {
                 ImplOrClassicAttribute::Classic(params) => expanded.extend(expand_from_local(
+                    enum_ident,
                     variant_ident,
                     &variant_name_snake_case,
                     params,
@@ -68,10 +76,22 @@ fn try_expand(input: &DeriveInput) -> syn::Result<TokenStream> {
             }
         }
         if let Some(params) = &attributes.into {
-            expanded.extend(expand_into(variant_ident, &variant_name_snake_case, params, fields));
+            expanded.extend(expand_into(
+                enum_ident,
+                variant_ident,
+                &variant_name_snake_case,
+                params,
+                fields,
+            ));
         }
         if let Some(params) = &attributes.is {
-            expanded.extend(expand_is(variant_ident, &variant_name_snake_case, params, fields));
+            expanded.extend(expand_is(
+                enum_ident,
+                variant_ident,
+                &variant_name_snake_case,
+                params,
+                fields,
+            ));
         }
     }
 

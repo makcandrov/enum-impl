@@ -5,6 +5,7 @@ use syn::Fields;
 use crate::attr::ClassicAttribute;
 
 pub fn expand_as_ref_mut(
+    enum_ident: &Ident,
     variant_ident: &Ident,
     variant_name_snake_case: &str,
     params: &ClassicAttribute,
@@ -109,7 +110,14 @@ pub fn expand_as_ref_mut(
         quote! {}
     };
 
+    let documentation = format!(
+        "Returns a mutable reference to the associated data if it is the [`{}::{}`] variant. Otherwise, returns `None`.",
+        enum_ident,
+        variant_ident
+    );
+
     quote! {
+        #[doc = #documentation]
         #keyword fn #function_name(&mut self) -> Option<#ty> {
             match self {
                 Self::#variant_ident #destruct => Some(#ret),
