@@ -2,7 +2,7 @@ use proc_macro2::{Ident, Span};
 use syn::meta::ParseNestedMeta;
 use syn::Token;
 
-#[derive(Default)]
+#[derive(Debug, Clone, Default)]
 pub struct EnumImplAttributes {
     pub as_ref_mut: Option<ClassicAttribute>,
     pub as_ref: Option<ClassicAttribute>,
@@ -114,6 +114,7 @@ enum Keyword {
     Impl,
 }
 
+#[derive(Debug, Clone)]
 struct ParametrizedAttribute {
     keyword: Keyword,
     name: Ident,
