@@ -1,7 +1,7 @@
 use enum_impl::EnumImpl;
 
 #[derive(EnumImpl)]
-enum WebEvent {
+pub enum WebEvent {
     #[enum_impl(pub is)]
     PageLoad,
     #[enum_impl(pub is)]
