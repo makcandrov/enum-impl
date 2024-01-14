@@ -12,7 +12,7 @@ pub enum Shape {
     Cuboid { width: f64, height: f64, depth: f64 },
 }
 
-pub fn main() {
+fn main() {
     let circle = Shape::Circle(5.0);
     assert!(circle.is_circle());
 

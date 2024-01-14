@@ -70,7 +70,7 @@ pub fn expand_as_ref_mut(
             for field in &unnamed_fields.unnamed {
                 assert!(field.ident.is_none());
 
-                let var_ident = Ident::new(&format!("f{i}"), Span::call_site());
+                let var_ident = Ident::new(&format!("arg{i}"), Span::call_site());
 
                 let field_ty = &field.ty;
 

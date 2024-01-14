@@ -14,7 +14,7 @@ pub enum WebEvent {
     Click { x: i64, y: i64 },
 }
 
-pub fn main() {
+fn main() {
     let page_load = WebEvent::PageLoad;
     assert!(page_load.is_page_load());
 
