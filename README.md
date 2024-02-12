@@ -1,5 +1,8 @@
 # enum-impl
 
+> [!WARNING]
+> This crate is in the process of being deprecated in favor of [`quick-impl`](https://github.com/makcandrov/quick-impl), a rework of this crate that provides more features, including handling structures.
+
 `enum-impl` is a Rust procedural macro that simplifies working with enums by generating common methods and traits for each variant. This helps reduce boilerplate code and enhances the ergonomics of using enums in your Rust projects.
 
 ## Features
